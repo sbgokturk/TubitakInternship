@@ -477,3 +477,17 @@ scala.reflect.internal.FatalError: /Users/hadoop/hbase/hbase/Scala/Unzip/Sources
 2017-08-09 12:08:00,846  WARN [Worker-7] - ScalaProject - Project UnzipFile runs on platform default installation.
 2017-08-09 12:08:54,878  WARN [Worker-6] - ScalaProject - Project UnzipFile has platform default sourceLevel.
 2017-08-09 12:08:54,878  WARN [Worker-6] - ScalaProject - Project UnzipFile runs on platform default installation.
+2017-08-09 14:15:54,037  WARN [ModalContext] - ScalaProject - Project Timer has platform default sourceLevel.
+2017-08-09 14:15:54,037  WARN [ModalContext] - ScalaProject - Project Timer runs on platform default installation.
+2017-08-09 14:15:54,342  WARN [Worker-22] - ScalaProject - Project Timer has platform default sourceLevel.
+2017-08-09 14:15:54,343  WARN [Worker-22] - ScalaProject - Project Timer runs on platform default installation.
+2017-08-09 14:16:05,910  WARN [main] - ScalaProject - Project Timer has platform default sourceLevel.
+2017-08-09 14:16:05,910  WARN [main] - ScalaProject - Project Timer runs on platform default installation.
+2017-08-09 14:16:08,600  WARN [main] - ScalaProject - Project Timer has platform default sourceLevel.
+2017-08-09 14:16:08,601  WARN [main] - ScalaProject - Project Timer runs on platform default installation.
+2017-08-09 14:16:08,735  WARN [Worker-30] - ScalaProject - Project Timer has platform default sourceLevel.
+2017-08-09 14:16:08,735  WARN [Worker-30] - ScalaProject - Project Timer runs on platform default installation.
+2017-08-09 14:16:38,082  WARN [Worker-29] - ScalaProject - Project Timer has platform default sourceLevel.
+2017-08-09 14:16:38,082  WARN [Worker-29] - ScalaProject - Project Timer runs on platform default installation.
+2017-08-09 14:17:10,613  WARN [Worker-32] - ScalaProject - Project Timer has platform default sourceLevel.
+2017-08-09 14:17:10,614  WARN [Worker-32] - ScalaProject - Project Timer runs on platform default installation.

@@ -23,8 +23,10 @@ object Count {
     for (i <- 0 to (counts_arr.length - 1)) {
       val datum = counts_arr(i).split("#")
 
-      if (datum.length == 10) {
+      if (datum.length >= 10) {
         var newCount = new Count
+
+
         newCount.countType = datum(0)
         if (datum(1) != "") {
           newCount.count = datum(1).toLong
@@ -33,12 +35,26 @@ object Count {
         }
         newCount.objectType = datum(2)
         var newLocation = new Location
-        newLocation.locationType = datum(3).toInt
+
+        if (datum(3) != "") {
+          newLocation.locationType = datum(3).toInt
+        } else {
+          newLocation.locationType = 0
+        }
         newLocation.locationFullName = datum(4)
         newLocation.locationCountryCode = datum(5)
         newLocation.locationADM1Code = datum(6)
-        newLocation.locationLatitude = datum(7).toFloat
-        newLocation.locationLongitude = datum(8).toFloat
+        if (datum(7) != "") {
+          newLocation.locationLatitude = datum(7).toFloat
+        } else {
+          newLocation.locationLatitude = 0
+        }
+
+        if (datum(8) != "") {
+          newLocation.locationLongitude = datum(8).toFloat
+        } else {
+          newLocation.locationLongitude = 0
+        }
         newLocation.locationFeatureID = datum(9)
         newCount.location = newLocation
         ret(i) = newCount

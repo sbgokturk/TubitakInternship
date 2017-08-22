@@ -27,14 +27,44 @@ object Tone {
     if (toneString != null) {
       var toneFeatures = toneString.split(",")
 
-      if (toneFeatures.length == 6) {
-        ret.tone = toneFeatures(0).toFloat
-        ret.positiveScore = toneFeatures(1).toFloat
-        ret.negativeScore = toneFeatures(2).toFloat
-        ret.polarity = toneFeatures(3).toFloat
-        ret.activityReferenceDensity = toneFeatures(4).toFloat
-        ret.sgReferenceDensity = toneFeatures(5).toFloat
-        ret.wordCount = toneFeatures(6).toLong
+      if (toneFeatures.length >= 6) {
+        if (toneFeatures(0) != "") {
+          ret.tone = toneFeatures(0).toFloat
+        } else {
+          ret.tone = 0
+        }
+        if (toneFeatures(1) != "") {
+          ret.positiveScore = toneFeatures(1).toFloat
+        } else {
+          ret.positiveScore = 0
+        }
+        if (toneFeatures(2) != "") {
+          ret.negativeScore = toneFeatures(2).toFloat
+        } else {
+          ret.negativeScore = 0
+        }
+        if (toneFeatures(3) != "") {
+          ret.polarity = toneFeatures(3).toFloat
+        } else {
+          ret.polarity = 0
+        }
+        if (toneFeatures(4) != "") {
+          ret.activityReferenceDensity = toneFeatures(4).toFloat
+        } else {
+          ret.activityReferenceDensity = 0
+        }
+        if (toneFeatures(5) != "") {
+          ret.sgReferenceDensity = toneFeatures(5).toFloat
+        } else {
+          ret.sgReferenceDensity = 0
+        }
+        if (toneFeatures(6) != "") {
+          ret.wordCount = toneFeatures(6).toLong
+        } else {
+          ret.wordCount = 0
+        }
+
+
       }
     }
     return ret

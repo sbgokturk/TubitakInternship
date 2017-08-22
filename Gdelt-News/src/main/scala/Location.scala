@@ -30,13 +30,25 @@ object Location {
       val features = locations(i).split("#")
       var newLocation = new Location
 
-      if (features.length == 7) {
-        newLocation.locationType = features(0).toInt
+      if (features.length >= 7) {
+        if (features(0) != "") {
+          newLocation.locationType = features(0).toInt
+        } else {
+          newLocation.locationType = 0
+        }
         newLocation.locationFullName = features(1)
         newLocation.locationCountryCode = features(2)
         newLocation.locationADM1Code = features(3)
-        newLocation.locationLatitude = features(4).toFloat
-        newLocation.locationLongitude = features(5).toFloat
+        if (features(4) != "") {
+          newLocation.locationLatitude = features(4).toFloat
+        } else {
+          newLocation.locationLatitude = 0
+        }
+        if (features(5) != "") {
+          newLocation.locationLongitude = features(5).toFloat
+        } else {
+          newLocation.locationLongitude = 0
+        }
         newLocation.locationFeatureID = features(6)
 
         ret(i) = newLocation

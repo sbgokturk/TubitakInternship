@@ -1,4 +1,7 @@
-import org.apache.spark.sql.{Row, SparkSession}
+import akka.http.scaladsl.model.Uri.Query
+import org.apache.spark.sql.{Column, DataFrame, Row, SparkSession}
+
+import scala.collection.mutable.ListBuffer
 
 class Data(fileName: String) {
 
@@ -13,20 +16,56 @@ class Data(fileName: String) {
   val dataReader = new DataReader;
   val df = dataReader.importData(fileName, dataReader.SCHEMA_GKG)
 
-  def demo(): Unit = {
-    df.filter("LOWER(V1PERSONS) LIKE LOWER('%MERKEL%')").foreach(row => Main2.parseRow(row))
-    //df.select("V2.1COUNTS").show(10)
-    //df.foreach(row => println(row(5)))
+  def filterByPerson(dataFrame: DataFrame, nameString: String): DataFrame = {
+
+    val queryString = "LOWER(V1PERSONS) LIKE LOWER('%".concat(nameString).concat("%') " +
+      "OR LOWER(V2ENHANCEDPERSONS) LIKE LOWER('%").concat(nameString).concat("%')")
+    return dataFrame.filter(queryString)
   }
 
+  def filterByTheme(dataFrame: DataFrame, themeString: String): DataFrame = {
+    val queryString = "LOWER(V1THEMES) LIKE LOWER('%".concat(themeString)
+      .concat("%') OR LOWER(V2ENHANCEDTHEMES) LIKE LOWER('%").concat(themeString).concat("%')")
+    return dataFrame.filter(queryString)
+  }
+
+  def filterByLocation(dataFrame: DataFrame, locationString: String): DataFrame = {
+    val queryString = "LOWER(V1LOCATIONS) LIKE LOWER('%".concat(locationString)
+      .concat("%') OR LOWER(V2ENHANCEDLOCATIONS) LIKE LOWER('%").concat(locationString).concat("%')")
+    return dataFrame.filter(queryString)
+  }
+
+  def demo(queryType: String, query: String): Unit = {
+
+    queryType match {
+      case "location" => filterByLocation(df, query).foreach(row => Data.parseRow(row))
+      case "theme" => filterByTheme(df, query).foreach(row => Data.parseRow(row))
+      case "person" => filterByPerson(df, query).foreach(row => Data.parseRow(row))
+      case whoa => throw new Exception("Undefined query type" + whoa)
+    }
+
+  }
 
 }
 
-object Main2 {
-  def main(args: Array[String]): Unit = {
-    val data = new Data("20170821114500.gkg.csv");
-    data.demo()
+import akka.actor.ActorSystem
+import akka.http.scaladsl.Http
+import akka.http.scaladsl.model._
+import akka.http.scaladsl.server.Directives._
+import akka.stream.ActorMaterializer
+import scala.io.StdIn
+
+import com.google.gson.Gson
+
+object Data {
+  var arr: ListBuffer[String] = new ListBuffer[String]()
+
+  def addElt(arr: ListBuffer[String]): Unit = {
+    arr += "Kamil"
   }
+
+
+
 
   def parseRow(row: Row): Unit = {
 
@@ -130,8 +169,10 @@ object Main2 {
     var myNew = new New(date, sourceName, documentIdent, counts1, counts2, themes1, themes2, locations1,
       locations2, persons1, persons2, organizations1, organizations2, tone, gcam, image, relatedImages,
       socialImages, socialVideos)
+    //println(myNew.toString)
 
-    println(myNew)
+    val gson = new Gson
+    arr += gson.toJson(myNew)
 
   }
 }
